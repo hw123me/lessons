@@ -139,7 +139,9 @@
         <textarea id="ex3" placeholder="# اكتب كود بايثون هنا..."></textarea>
       </div>
 
-      <button onclick="sendToTeacher()">🚀 إرسال الحل إلى لوحة المعلم</button>
+      <button id="sendButton" onclick="sendToTeacher()">
+        🚀 إرسال الحل إلى لوحة المعلم
+      </button>
     </div>
 
     <script>
@@ -154,7 +156,12 @@
           return;
         }
 
-        const url = "https://script.google.com/macros/s/AKfycbwY5jz2P1cbEAvJcECFLTDJNHSQdHfNQ6f-1HvXDMnvGm-b-Aa_x0bmd4ETZg4zhhjHRw/exec"; // <--- ضع الرابط هنا بين العلامتين
+        const sendButton = document.getElementById("sendButton");
+        sendButton.disabled = true;
+        sendButton.textContent = "⏳ جارٍ الإرسال...";
+
+        const url =
+          "https://script.google.com/macros/s/AKfycbwY5jz2P1cbEAvJcECFLTDJNHSQdHfNQ6f-1HvXDMnvGm-b-Aa_x0bmd4ETZg4zhhjHRw/exec"; // <--- ضع الرابط هنا بين العلامتين
 
         fetch(url, {
           method: "POST",
@@ -166,13 +173,19 @@
           }),
         })
           .then((res) => {
+            sendButton.disabled = false;
+            sendButton.textContent = "🚀 إرسال الحل إلى لوحة المعلم";
             alert(
               "تم إرسال إجابتك بنجاح يا " +
                 name +
                 "! ستظهر الآن في لوحة المعلم.",
             );
           })
-          .catch((err) => alert("حدث خطأ أثناء الإرسال!"));
+          .catch((err) => {
+            sendButton.disabled = false;
+            sendButton.textContent = "🚀 إرسال الحل إلى لوحة المعلم";
+            alert("حدث خطأ أثناء الإرسال!");
+          });
       }
     </script>
   </body>
