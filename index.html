@@ -2,101 +2,176 @@
 <html lang="ar" dir="rtl">
   <head>
     <meta charset="UTF-8" />
+    <!-- إضافة viewport للتوافق مع أجهزة الجوال والتابلت -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>درس بايثون التفاعلي: الجمل الشرطية</title>
     <style>
+      * {
+        box-sizing: border-box;
+      }
+
       body {
         font-family: Arial, sans-serif;
-        margin: 20px;
+        margin: 0;
+        padding: 15px;
         background-color: #f4f7f6;
         color: #333;
+        line-height: 1.6;
       }
+
+      .corner-link {
+        background: #ffffff;
+        padding: 10px 15px;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        margin: 0 auto 15px auto;
+        max-width: 700px;
+        text-align: center;
+        font-size: 14px;
+        border: 1px solid #e2e8f0;
+      }
+
+      .corner-link a {
+        color: #2b6cb0;
+        font-weight: bold;
+        word-break: break-all;
+      }
+
       .container {
         max-width: 700px;
         background: white;
-        padding: 30px;
-        border-radius: 8px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 25px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
         margin: auto;
       }
-      h1,
-      h2 {
+
+      h1 {
+        font-size: 1.5rem;
         color: #2c3e50;
+        margin-top: 0;
       }
+
+      h2, h3 {
+        color: #2c3e50;
+        font-size: 1.2rem;
+      }
+
       .exercise {
         background: #eef2f3;
         padding: 15px;
-        border-radius: 6px;
+        border-radius: 8px;
         margin-bottom: 20px;
       }
+
       textarea {
         width: 100%;
-        height: 100px;
-        font-family: monospace;
+        height: 110px;
+        font-family: Consolas, Monaco, monospace;
         direction: ltr;
         text-align: left;
-        padding: 10px;
-        box-sizing: border-box;
+        padding: 12px;
         border: 1px solid #ccc;
-        border-radius: 4px;
+        border-radius: 6px;
+        font-size: 14px;
+        resize: vertical;
       }
+
       input[type="text"] {
         width: 100%;
-        padding: 10px;
+        padding: 12px;
+        margin-top: 5px;
         margin-bottom: 20px;
-        box-sizing: border-box;
         border: 1px solid #ccc;
-        border-radius: 4px;
+        border-radius: 6px;
+        font-size: 15px;
       }
+
+      /* تحسين استجابة الجدول على الجوال والتابلت */
+      .table-responsive {
+        overflow-x: auto;
+        margin-bottom: 15px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        background: #fff;
+        min-width: 280px;
+      }
+
+      th, td {
+        border: 1px solid #cbd5e0;
+        padding: 10px;
+        text-align: center;
+        font-size: 14px;
+      }
+
+      th {
+        background-color: #e2e8f0;
+      }
+
       button {
         background-color: #27ae60;
         color: white;
         border: none;
-        padding: 12px 20px;
+        padding: 14px 20px;
         font-size: 16px;
-        border-radius: 4px;
+        font-weight: bold;
+        border-radius: 6px;
         cursor: pointer;
         width: 100%;
+        transition: background-color 0.2s ease;
       }
+
       button:hover {
         background-color: #219653;
       }
-      .code-box {
-        background: #2d3748;
-        color: #fff;
-        padding: 10px;
-        border-radius: 4px;
-        font-family: monospace;
-        direction: ltr;
-        text-align: left;
-        overflow-x: auto;
+
+      button:disabled {
+        background-color: #95a5a6;
+        cursor: not-allowed;
       }
-      .corner-link {
-        position: fixed;
-        top: 12px;
-        left: max(20px, calc((100vw - 760px) / 2));
-        z-index: 1;
-        padding: 8px 12px;
-        background: white;
-        border-radius: 4px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+      /* تعديلات للأجهزة ذات الشاشات الصغيرة (الجوال) */
+      @media (max-width: 600px) {
+        body {
+          padding: 10px;
+        }
+
+        .container {
+          padding: 15px;
+        }
+
+        h1 {
+          font-size: 1.3rem;
+        }
+
+        h3 {
+          font-size: 1.1rem;
+        }
+
+        button {
+          padding: 12px 15px;
+          font-size: 15px;
+        }
       }
     </style>
   </head>
   <body>
     <div class="corner-link">
-      لتجربة الأكواد اضغط على الرابط
-      <a href="https://onecompiler.com/python" target="_blank" rel="noopener noreferrer">https://onecompiler.com/python</a>
+      💡 لتجربة الأكواد اضغط على الرابط: 
+      <a href="https://onecompiler.com/python" target="_blank" rel="noopener noreferrer">onecompiler.com/python</a>
     </div>
 
     <div class="container">
       <h1>🐍 درس الجمل الشرطية في Python</h1>
       <p>
         <strong>الشرح المختصر:</strong> نستخدم <code>if</code> للشرط الأول، و
-        <code>elif</code> للشروط البديلة، و <code>else</code> إذا لم يتحقق أي
-        شرط.
+        <code>elif</code> للشروط البديلة، و <code>else</code> إذا لم يتحقق أي شرط.
       </p>
 
-      <label><strong>👤 اسم الطالب الثلاثي:</strong></label>
+      <label for="studentName"><strong>👤 اسم الطالب الثلاثي:</strong></label>
       <input
         type="text"
         id="studentName"
@@ -108,39 +183,44 @@
       <div class="exercise">
         <h3>🌡️ التمرين الأول: تصنيف درجة الحرارة</h3>
         <p>
-          اكتب برنامجاً يطبع "بارد" إذا كانت الحرارة أقل من 18، "معتدل" أقل من
-          30، و "حار" أكبر من 30
+          اكتب برنامجاً يطبع "بارد" إذا كانت الحرارة أقل من 18، "معتدل" أقل من 30، و "حار" أكبر من 30.
         </p>
-        <p>اسنخدم المتغير temperature</p>
+        <p>استخدم المتغير <code>temperature</code></p>
         <textarea id="ex1" placeholder="# اكتب كود بايثون هنا..."></textarea>
       </div>
 
       <!-- التمرين الثاني -->
       <div class="exercise">
         <h3>🎓 التمرين الثاني: حساب التقدير الدراسي</h3>
-        <table border="1" cellpadding="8">
-          <tr>
-            <th>الشرط</th>
-            <th>التقدير</th>
-          </tr>
-          <tr>
-            <td>الدرجة أكبر من أو تساوي 90</td>
-            <td>ممتاز</td>
-          </tr>
-          <tr>
-            <td>الدرجة أكبر من أو تساوي 70 وأقل من 90</td>
-            <td>جيد جداً</td>
-          </tr>
-          <tr>
-            <td>الدرجة أكبر من أو تساوي 50 وأقل من 70</td>
-            <td>جيد</td>
-          </tr>
-          <tr>
-            <td>الدرجة أقل من 50</td>
-            <td>ضعيف</td>
-          </tr>
-        </table>
-        <p>استخدم المتغير grade</p>
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>الشرط</th>
+                <th>التقدير</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>الدرجة أكبر من أو تساوي 90</td>
+                <td>ممتاز</td>
+              </tr>
+              <tr>
+                <td>الدرجة أكبر من أو تساوي 70 وأقل من 90</td>
+                <td>جيد جداً</td>
+              </tr>
+              <tr>
+                <td>الدرجة أكبر من أو تساوي 50 وأقل من 70</td>
+                <td>جيد</td>
+              </tr>
+              <tr>
+                <td>الدرجة أقل من 50</td>
+                <td>ضعيف</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>استخدم المتغير <code>grade</code></p>
         <textarea id="ex2" placeholder="# اكتب كود بايثون هنا..."></textarea>
       </div>
 
@@ -150,7 +230,7 @@
         <p>
           اكتب برنامجاً يطلب عدداً ويحدد ما إذا كان (موجب، سالب، أو يساوي صفر).
         </p>
-        <p>استخدم المتغير number</p>
+        <p>استخدم المتغير <code>number</code></p>
         <textarea id="ex3" placeholder="# اكتب كود بايثون هنا..."></textarea>
       </div>
 
@@ -161,7 +241,7 @@
 
     <script>
       function sendToTeacher() {
-        const name = document.getElementById("studentName").value;
+        const name = document.getElementById("studentName").value.trim();
         const ans1 = document.getElementById("ex1").value;
         const ans2 = document.getElementById("ex2").value;
         const ans3 = document.getElementById("ex3").value;
@@ -176,7 +256,7 @@
         sendButton.textContent = "⏳ جارٍ الإرسال...";
 
         const url =
-          "https://script.google.com/macros/s/AKfycbwY5jz2P1cbEAvJcECFLTDJNHSQdHfNQ6f-1HvXDMnvGm-b-Aa_x0bmd4ETZg4zhhjHRw/exec"; // <--- ضع الرابط هنا بين العلامتين
+          "https://script.google.com/macros/s/AKfycbwY5jz2P1cbEAvJcECFLTDJNHSQdHfNQ6f-1HvXDMnvGm-b-Aa_x0bmd4ETZg4zhhjHRw/exec";
 
         fetch(url, {
           method: "POST",
@@ -193,7 +273,7 @@
             alert(
               "تم إرسال إجابتك بنجاح يا " +
                 name +
-                "! ستظهر الآن في لوحة المعلم.",
+                "! ستظهر الآن في لوحة المعلم."
             );
           })
           .catch((err) => {
