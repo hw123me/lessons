@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <title>درس بايثون التفاعلي: الجمل الشرطية</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        background-color: #f4f7f6;
+        color: #333;
+      }
+      .container {
+        max-width: 700px;
+        background: white;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin: auto;
+      }
+      h1,
+      h2 {
+        color: #2c3e50;
+      }
+      .exercise {
+        background: #eef2f3;
+        padding: 15px;
+        border-radius: 6px;
+        margin-bottom: 20px;
+      }
+      textarea {
+        width: 100%;
+        height: 100px;
+        font-family: monospace;
+        direction: ltr;
+        text-align: left;
+        padding: 10px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+      input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+      button {
+        background-color: #27ae60;
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        font-size: 16px;
+        border-radius: 4px;
+        cursor: pointer;
+        width: 100%;
+      }
+      button:hover {
+        background-color: #219653;
+      }
+      .code-box {
+        background: #2d3748;
+        color: #fff;
+        padding: 10px;
+        border-radius: 4px;
+        font-family: monospace;
+        direction: ltr;
+        text-align: left;
+        overflow-x: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>🐍 درس الجمل الشرطية في Python</h1>
+      <p>
+        <strong>الشرح المختصر:</strong> نستخدم <code>if</code> للشرط الأول، و
+        <code>elif</code> للشروط البديلة، و <code>else</code> إذا لم يتحقق أي
+        شرط.
+      </p>
+
+      <label><strong>👤 اسم الطالب الثلاثي:</strong></label>
+      <input
+        type="text"
+        id="studentName"
+        placeholder="أدخل اسمك هنا..."
+        required
+      />
+
+      <!-- التمرين الأول -->
+      <div class="exercise">
+        <h3>🌡️ التمرين الأول: تصنيف درجة الحرارة</h3>
+        <p>
+          اكتب برنامجاً يطبع "بارد" إذا كانت الحرارة أقل من 18، "معتدل" أقل من
+          30، و "حار" أكبر من 30
+        </p>
+        <p>اسنخدم المتغير temperature</p>
+        <textarea id="ex1" placeholder="# اكتب كود بايثون هنا..."></textarea>
+      </div>
+
+      <!-- التمرين الثاني -->
+      <div class="exercise">
+        <h3>🎓 التمرين الثاني: حساب التقدير الدراسي</h3>
+        <table border="1" cellpadding="8">
+          <tr>
+            <th>الشرط</th>
+            <th>التقدير</th>
+          </tr>
+          <tr>
+            <td>الدرجة أكبر من أو تساوي 90</td>
+            <td>ممتاز</td>
+          </tr>
+          <tr>
+            <td>الدرجة أكبر من أو تساوي 70 وأقل من 90</td>
+            <td>جيد جداً</td>
+          </tr>
+          <tr>
+            <td>الدرجة أكبر من أو تساوي 50 وأقل من 70</td>
+            <td>جيد</td>
+          </tr>
+          <tr>
+            <td>الدرجة أقل من 50</td>
+            <td>ضعيف</td>
+          </tr>
+        </table>
+        <p>استخدم المتغير grade</p>
+        <textarea id="ex2" placeholder="# اكتب كود بايثون هنا..."></textarea>
+      </div>
+
+      <!-- التمرين الثالث -->
+      <div class="exercise">
+        <h3>🔢 التمرين الثالث: إشارة العدد</h3>
+        <p>
+          اكتب برنامجاً يطلب عدداً ويحدد ما إذا كان (موجب، سالب، أو يساوي صفر).
+        </p>
+        <p>استخدم المتغير number</p>
+        <textarea id="ex3" placeholder="# اكتب كود بايثون هنا..."></textarea>
+      </div>
+
+      <button onclick="sendToTeacher()">🚀 إرسال الحل إلى لوحة المعلم</button>
+    </div>
+
+    <script>
+      function sendToTeacher() {
+        const name = document.getElementById("studentName").value;
+        const ans1 = document.getElementById("ex1").value;
+        const ans2 = document.getElementById("ex2").value;
+        const ans3 = document.getElementById("ex3").value;
+
+        if (!name) {
+          alert("الرجاء كتابة اسمك أولاً!");
+          return;
+        }
+
+        const url = "https://script.google.com/macros/s/AKfycbwY5jz2P1cbEAvJcECFLTDJNHSQdHfNQ6f-1HvXDMnvGm-b-Aa_x0bmd4ETZg4zhhjHRw/exec"; // <--- ضع الرابط هنا بين العلامتين
+
+        fetch(url, {
+          method: "POST",
+          body: JSON.stringify({
+            name: name,
+            ans1: ans1,
+            ans2: ans2,
+            ans3: ans3,
+          }),
+        })
+          .then((res) => {
+            alert(
+              "تم إرسال إجابتك بنجاح يا " +
+                name +
+                "! ستظهر الآن في لوحة المعلم.",
+            );
+          })
+          .catch((err) => alert("حدث خطأ أثناء الإرسال!"));
+      }
+    </script>
+  </body>
+</html>
